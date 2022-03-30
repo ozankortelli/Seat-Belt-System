@@ -1,0 +1,108 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.std_logic_unsigned.all;
+use IEEE.std_logic_arith.all;
+
+
+
+entity sonhali is
+
+    generic(N: integer range 0 to 113;
+            r: integer:= 0_0001;
+            t: integer:= 1;
+            pi: integer:= 3);
+            
+    Port ( clk : in STD_LOGIC;
+           a : inout integer range 0 to 255;
+           ax : inout STD_LOGIC;
+           b : in STD_LOGIC;
+           bx : inout STD_LOGIC;
+           c : in STD_LOGIC;
+           cx : inout STD_LOGIC;
+           d : in STD_LOGIC;
+           dx : inout STD_LOGIC;
+           f : inout STD_LOGIC);
+          
+end sonhali;
+
+architecture Behavioral of sonhali is
+ signal input:std_logic_vector(3 downto 0);
+
+begin
+ process(clk)
+  variable n: integer range 0 to 113;
+   begin
+    if(clk'event and clk='1') then
+     n:=n+1;
+     if(n=113) then
+     n:=113;
+     end if; 
+    end if;
+   
+   a<=(2*pi*r*n)/(t/3600);
+   case(a) is
+     when 20 to 255=>ax<='1';
+     when others=>ax<='0';
+    end case;
+   end process;
+
+  process(b)
+   begin
+    if b = '1' then
+     bx<='1';
+     else 
+     bx<='0';
+    end if ;
+   end process;
+
+  process(c)
+   begin
+    if (c <= '1')
+    then
+    cx<='1';
+    else 
+    cx<='0';
+   end if ;
+  end process;
+  
+  process(d)
+   begin
+   if (d <= '1') then
+   dx<='1';
+   else 
+   dx<='0';
+  end if ;
+ end process;
+ 
+
+ input(0)<=ax;
+ input(1)<=bx;
+ input(2)<=cx;
+ input(3)<=dx;
+ 
+  process(ax,bx,cx,dx)
+   begin
+ 
+  case input is
+   when "1111" =>f<='0' ;
+   when "1110" =>f<='1'  ;
+   when "1101" =>f<='0'  ;
+   when "1100" =>f<='0' ;
+   when "1011" =>f<='1' ;
+   when "1010" =>f<='1' ;
+   when "1001" =>f<='1' ;
+   when "1000" =>f<='1' ;
+   when "0111" =>f<='0'  ;
+   when "0110" =>f<='0' ;
+   when "0101" =>f<='0'  ;
+   when "0100" =>f<='0' ;
+   when "0011" =>f<='0'  ;
+   when "0010" =>f<='0' ;
+   when "0001" =>f<='0' ;
+   when others =>f<='0';
+   end case;
+  
+   end process;
+   
+
+end Behavioral;

@@ -1,0 +1,63 @@
+library IEEE;
+use IEEE.Std_logic_1164.all;
+use IEEE.Numeric_Std.all;
+
+entity sonhali_tb is
+end;
+
+architecture bench of sonhali_tb is
+
+  component sonhali
+  port(
+  ax : in STD_LOGIC;
+             bx : in STD_LOGIC;
+                      cx : in STD_LOGIC;
+             dx : in std_logic;
+             f : out STD_LOGIC);
+  end component;
+
+  signal ax: std_logic;
+  signal bx: STD_LOGIC;
+  signal cx: STD_LOGIC;
+  signal dx: STD_LOGIC;
+  signal f: STD_LOGIC;
+
+begin
+
+  uut: sonhali port map ( ax => ax,
+                          bx => bx,
+                          cx => cx,
+                          dx => dx,
+                          f  => f );
+
+  stimulus: process
+  begin
+  
+    -- Put initialisation code here
+
+wait for 10 ns;
+ax<='1'; bx<='1';cx<='1';dx<='1';wait for 20 ns;
+ax<='1'; bx<='1';cx<='1';dx<='0';wait for 20 ns;
+ax<='1'; bx<='1';cx<='0';dx<='1';wait for 20 ns;
+ax<='1'; bx<='1';cx<='0';dx<='0';wait for 20 ns;
+ax<='1'; bx<='0';cx<='1';dx<='1';wait for 20 ns;
+ax<='1'; bx<='0';cx<='1';dx<='0';wait for 20 ns;
+ax<='1'; bx<='0';cx<='0';dx<='1';wait for 20 ns;
+ax<='1'; bx<='0';cx<='0';dx<='0';wait for 20 ns;
+ax<='0'; bx<='1';cx<='1';dx<='1';wait for 20 ns;
+ax<='0'; bx<='1';cx<='1';dx<='0';wait for 20 ns;
+ax<='0'; bx<='1';cx<='0';dx<='1';wait for 20 ns;
+ax<='0'; bx<='1';cx<='0';dx<='0';wait for 20 ns;
+ax<='0'; bx<='0';cx<='1';dx<='1';wait for 20 ns;
+ax<='0'; bx<='0';cx<='1';dx<='0';wait for 20 ns;
+ax<='0'; bx<='0';cx<='0';dx<='1';wait for 20 ns;
+ax<='0'; bx<='0';cx<='0';dx<='0';
+
+
+    -- Put test bench stimulus code here
+
+    wait;
+  end process;
+
+
+end;
